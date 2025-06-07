@@ -1,4 +1,4 @@
-## PIP 长边调整节点 PIP 长边调整节点
+## 自用的comfyui节点汇总
 ![微信截图_20250321154122](https://github.com/user-attachments/assets/45455018-9a83-4a82-b30e-3ce9ddfd8612)
 
 #### 简介 简介
