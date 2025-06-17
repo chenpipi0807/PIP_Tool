@@ -1,5 +1,7 @@
 ## 自用的comfyui节点汇总
 ![image](https://github.com/user-attachments/assets/276c33dd-5fda-4d75-bbf4-9cbc312c6068)
+![image](https://github.com/user-attachments/assets/f80ad400-1cc8-4dc3-b356-3f43b53ec696)
+
 
 
 ## 功能记录
@@ -9,3 +11,4 @@
 - 整数计算
 - 图像联结（第三张非必选）
 - 图像去色节点
+- 人脸检测和裁切节点
