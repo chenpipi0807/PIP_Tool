@@ -4,6 +4,7 @@ from .PIP_string_concatenation import PIP_StringConcatenation
 from .PIP_image_concatenation import PIP_ImageConcatenation
 from .PIP_Grayscale import PIP_Grayscale
 from .PIP_HeadCrop import PIP_HeadCrop
+from .PIP_PuzzleTool import PIP_PuzzleTool
 
 NODE_CLASS_MAPPINGS = {
     "PIP_longsize": PIP_longsize,
@@ -12,7 +13,8 @@ NODE_CLASS_MAPPINGS = {
     "PIP_StringConcatenation": PIP_StringConcatenation,
     "PIP_图像联结": PIP_ImageConcatenation,
     "PIP_Grayscale": PIP_Grayscale,
-    "PIP_HeadCrop": PIP_HeadCrop
+    "PIP_HeadCrop": PIP_HeadCrop,
+    "PIP_PuzzleTool": PIP_PuzzleTool
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -22,5 +24,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PIP_StringConcatenation": "PIP 字符串拼接",
     "PIP_图像联结": "PIP 图像联结",
     "PIP_Grayscale": "PIP 图像去色",
-    "PIP_HeadCrop": "PIP 人脸检测"
+    "PIP_HeadCrop": "PIP 人脸检测",
+    "PIP_PuzzleTool": "PIP 拼图工具"
 }
