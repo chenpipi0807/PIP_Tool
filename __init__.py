@@ -5,6 +5,7 @@ from .PIP_image_concatenation import PIP_ImageConcatenation
 from .PIP_Grayscale import PIP_Grayscale
 from .PIP_HeadCrop import PIP_HeadCrop
 from .PIP_PuzzleTool import PIP_PuzzleTool, PIP_DynamicPuzzleSelection
+from .PIP_SearchReplace import PIP_SearchReplace
 
 NODE_CLASS_MAPPINGS = {
     "PIP_longsize": PIP_longsize,
@@ -15,7 +16,8 @@ NODE_CLASS_MAPPINGS = {
     "PIP_Grayscale": PIP_Grayscale,
     "PIP_HeadCrop": PIP_HeadCrop,
     "PIP_PuzzleTool": PIP_PuzzleTool,
-    "PIP_DynamicPuzzleSelection": PIP_DynamicPuzzleSelection
+    "PIP_DynamicPuzzleSelection": PIP_DynamicPuzzleSelection,
+    "PIP_SearchReplace": PIP_SearchReplace
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -27,5 +29,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PIP_Grayscale": "PIP 图像去色",
     "PIP_HeadCrop": "PIP 人脸检测",
     "PIP_PuzzleTool": "PIP 拼图工具",
-    "PIP_DynamicPuzzleSelection": "PIP 拼图动态选择"
+    "PIP_DynamicPuzzleSelection": "PIP 拼图动态选择",
+    "PIP_SearchReplace": "PIP 搜索替换"
 }
