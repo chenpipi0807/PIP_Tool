@@ -247,8 +247,8 @@ class PIP_DynamicPuzzleSelection:
             },
         }
 
-    RETURN_TYPES = ("IMAGE", "STRING")
-    RETURN_NAMES = ("image", "description")
+    RETURN_TYPES = ("IMAGE", "IMAGE", "STRING")
+    RETURN_NAMES = ("image", "clean_image", "description")
     FUNCTION = "select_and_stitch"
     CATEGORY = "图像处理"
 
@@ -302,7 +302,7 @@ class PIP_DynamicPuzzleSelection:
         if not images_data:
             # Create a small black image
             empty_img = torch.zeros((1, 3, 100, 100))
-            return empty_img, "No images matched the selection criteria"
+            return empty_img, empty_img, "No images matched the selection criteria"
         
         # Convert tensors to PIL images and resize
         pil_images = []
@@ -317,20 +317,23 @@ class PIP_DynamicPuzzleSelection:
         # Calculate the total width of the stitched image
         total_width = sum(img.width for img, _ in pil_images) + inter_image_margin * (len(pil_images) - 1)
         
-        # Create blank image with black background
-        # Calculate text height (approximately)
+        # Create clean image (without text and bottom margin)
+        clean_result = Image.new('RGB', (total_width, image_height), (0, 0, 0))
+        
+        # Create image with text and bottom margin
         max_text_height = font_size * 2  # Give some extra space for text
         result_height = image_height + max_text_height + bottom_margin
         result = Image.new('RGB', (total_width, result_height), (0, 0, 0))
         draw = ImageDraw.Draw(result)
         
-        # Paste images and draw texts
+        # Paste images for both clean and full versions
         x_offset = 0
         for img, text in pil_images:
-            # Paste image
+            # Paste image to both clean and full versions
+            clean_result.paste(img, (x_offset, 0))
             result.paste(img, (x_offset, 0))
             
-            # Draw text centered below image
+            # Draw text only on the full version
             if text:
                 try:
                     # Get text size to center it
@@ -348,9 +351,12 @@ class PIP_DynamicPuzzleSelection:
             # Move x_offset for next image
             x_offset += img.width + inter_image_margin
         
-        # Convert back to PyTorch tensor and add batch dimension
+        # Convert both images back to PyTorch tensors and add batch dimension
         result_tensor = self._pil_to_tensor(result)
         result_tensor = result_tensor.unsqueeze(0)
+        
+        clean_result_tensor = self._pil_to_tensor(clean_result)
+        clean_result_tensor = clean_result_tensor.unsqueeze(0)
         
         # Generate descriptive string
         titles = [text for _, text in pil_images]
@@ -359,7 +365,7 @@ class PIP_DynamicPuzzleSelection:
         else:
             description = self._generate_chinese_description(titles)
         
-        return (result_tensor, description)
+        return (result_tensor, clean_result_tensor, description)
         
     def _find_font_path(self, font_filename):
         """Search for the font file in various possible locations"""
