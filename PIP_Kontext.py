@@ -27,6 +27,7 @@ class PIP_Kontext:
                 "output_format": (["jpeg", "png"], {"default": "jpeg"}),
                 "prompt_upsampling": ("BOOLEAN", {"default": False}),
                 "safety_tolerance": ("INT", {"default": 2, "min": 0, "max": 6}),
+                "max_wait_time": ("INT", {"default": 300, "min": 60, "max": 1800, "step": 60}),
             },
         }
 
@@ -35,7 +36,7 @@ class PIP_Kontext:
     FUNCTION = "generate_image"
     CATEGORY = "图像处理/AI生成"
 
-    def generate_image(self, prompt, input_image, seed=42, guidance=3.0, steps=50, aspect_ratio="1:1", output_format="jpeg", prompt_upsampling=False, safety_tolerance=2):
+    def generate_image(self, prompt, input_image, seed=42, guidance=3.0, steps=50, aspect_ratio="1:1", output_format="jpeg", prompt_upsampling=False, safety_tolerance=2, max_wait_time=300):
         try:
             # 获取API密钥
             api_key = self._get_api_key()
@@ -84,7 +85,7 @@ class PIP_Kontext:
             print(f"正在等待图像生成...")
             
             # 轮询任务状态
-            generated_image = self._poll_task_status(polling_url, api_key)
+            generated_image = self._poll_task_status(polling_url, api_key, max_wait_time=max_wait_time)
             
             # 转换为ComfyUI张量格式
             image_tensor = self._url_to_tensor(generated_image)
