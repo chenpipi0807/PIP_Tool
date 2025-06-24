@@ -20,6 +20,7 @@ class PIP_Kontext:
                 "input_image": ("IMAGE",),
             },
             "optional": {
+                "model": (["flux-kontext-pro", "flux-kontext-max"], {"default": "flux-kontext-pro"}),
                 "seed": ("INT", {"default": 42, "min": 0, "max": 9999999999}),
                 "guidance": ("FLOAT", {"default": 3.0, "min": 1.0, "max": 10.0, "step": 0.1}),
                 "steps": ("INT", {"default": 50, "min": 1, "max": 100}),
@@ -36,7 +37,7 @@ class PIP_Kontext:
     FUNCTION = "generate_image"
     CATEGORY = "图像处理/AI生成"
 
-    def generate_image(self, prompt, input_image, seed=42, guidance=3.0, steps=50, aspect_ratio="1:1", output_format="jpeg", prompt_upsampling=False, safety_tolerance=2, max_wait_time=300):
+    def generate_image(self, prompt, input_image, model="flux-kontext-pro", seed=42, guidance=3.0, steps=50, aspect_ratio="1:1", output_format="jpeg", prompt_upsampling=False, safety_tolerance=2, max_wait_time=300):
         try:
             # 获取API密钥
             api_key = self._get_api_key()
@@ -47,7 +48,7 @@ class PIP_Kontext:
             base64_image = self._image_to_base64(input_image)
 
             # 准备API请求
-            url = "https://api.bfl.ai/v1/flux-kontext-pro"
+            url = f"https://api.bfl.ai/v1/{model}"
             
             payload = {
                 "prompt": prompt,
