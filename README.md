@@ -25,3 +25,4 @@
 - kontext_pro/max（审核可以调成6）
 - 从工作流json解析变量
 - 从url加载图片
+- 从url加载json
