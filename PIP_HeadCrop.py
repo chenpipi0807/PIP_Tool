@@ -58,12 +58,6 @@ class PIP_HeadCrop:
         return {
             "required": {
                 "image": ("IMAGE",),
-                "max_size": ("INT", {
-                    "default": 1024,
-                    "min": 64,
-                    "max": 4096,
-                    "step": 64
-                }),
                 "padding_factor": ("FLOAT", {
                     "default": 0.2,
                     "min": 0.0,
@@ -73,16 +67,21 @@ class PIP_HeadCrop:
             },
         }
 
-    RETURN_TYPES = ("IMAGE",)
-    RETURN_NAMES = ("image",)
+    RETURN_TYPES = ("IMAGE", "MASK")
+    RETURN_NAMES = ("image", "mask")
     FUNCTION = "crop_head"
     CATEGORY = "图像处理"
 
-    def crop_head(self, image, max_size=1024, padding_factor=0.2):
+    def crop_head(self, image, padding_factor=0.2):
         # 确保模型已加载
         if self.model is None:
             print("YOLO模型未加载，返回原图")
-            return (image,)
+            # 创建一个与原图尺寸相同的全零mask
+            if image.dim() == 3:
+                image = image.unsqueeze(0)
+            batch_size, height, width = image.shape[0], image.shape[1], image.shape[2]
+            empty_mask = torch.zeros((batch_size, height, width), dtype=torch.float32)
+            return (image, empty_mask)
             
         # 确保图像是正确的维度 (batch_size, height, width, channels)
         if image.dim() == 3:
@@ -92,7 +91,8 @@ class PIP_HeadCrop:
         batch_size = image.shape[0]
         
         # 创建一个空列表来存储结果
-        result = []
+        result_images = []
+        result_masks = []
         
         # 处理每个批次
         for i in range(batch_size):
@@ -101,6 +101,10 @@ class PIP_HeadCrop:
             
             # 转换为PIL图像
             pil_img = self._tensor_to_pil(img)
+            original_width, original_height = pil_img.size
+            
+            # 创建与原图尺寸相同的mask
+            mask = Image.new('L', (original_width, original_height), 0)  # 黑色背景
             
             # 转换为OpenCV格式进行处理
             cv_img = cv2.cvtColor(np.array(pil_img), cv2.COLOR_RGB2BGR)
@@ -122,15 +126,10 @@ class PIP_HeadCrop:
                         area = (x2 - x1) * (y2 - y1)
                         heads.append((x1, y1, x2, y2, area, confidence))
             
-            # 如果检测到头部，选择最大的一个
             if heads:
-                # 按面积从大到小排序
+                # 选择面积最大的头部
                 heads.sort(key=lambda x: x[4], reverse=True)
                 x1, y1, x2, y2, _, _ = heads[0]
-                
-                # 计算边界框中心
-                center_x = (x1 + x2) // 2
-                center_y = (y1 + y2) // 2
                 
                 # 计算检测到的头部尺寸
                 head_width = x2 - x1
@@ -140,60 +139,42 @@ class PIP_HeadCrop:
                 padding_x = int(head_width * padding_factor)
                 padding_y = int(head_height * padding_factor)
                 
-                # 确定方形裁剪区域的边长（取宽高中的较大值，并加上填充）
-                crop_size = max(head_width + 2 * padding_x, head_height + 2 * padding_y)
+                # 计算裁剪坐标（直接使用矩形，不强制正方形）
+                crop_x1 = max(0, x1 - padding_x)
+                crop_y1 = max(0, y1 - padding_y)
+                crop_x2 = min(original_width, x2 + padding_x)
+                crop_y2 = min(original_height, y2 + padding_y)
                 
-                # 确定方形裁剪的坐标
-                crop_x1 = max(0, center_x - crop_size // 2)
-                crop_y1 = max(0, center_y - crop_size // 2)
-                crop_x2 = min(pil_img.width, crop_x1 + crop_size)
-                crop_y2 = min(pil_img.height, crop_y1 + crop_size)
-                
-                # 调整裁剪坐标以确保是个正方形
-                if crop_x2 - crop_x1 < crop_size:
-                    diff = crop_size - (crop_x2 - crop_x1)
-                    if crop_x1 > 0:
-                        crop_x1 = max(0, crop_x1 - diff)
-                    if crop_x2 < pil_img.width and crop_x2 - crop_x1 < crop_size:
-                        crop_x2 = min(pil_img.width, crop_x2 + (crop_size - (crop_x2 - crop_x1)))
-                
-                if crop_y2 - crop_y1 < crop_size:
-                    diff = crop_size - (crop_y2 - crop_y1)
-                    if crop_y1 > 0:
-                        crop_y1 = max(0, crop_y1 - diff)
-                    if crop_y2 < pil_img.height and crop_y2 - crop_y1 < crop_size:
-                        crop_y2 = min(pil_img.height, crop_y2 + (crop_size - (crop_y2 - crop_y1)))
+                # 在mask上绘制扩展后的裁切区域为白色
+                mask_np = np.array(mask)
+                mask_np[crop_y1:crop_y2, crop_x1:crop_x2] = 255
+                mask = Image.fromarray(mask_np, mode='L')
                 
                 # 裁剪图像
                 cropped_img = pil_img.crop((crop_x1, crop_y1, crop_x2, crop_y2))
                 
-                # 创建一个正方形的白色背景
-                side_length = max(cropped_img.width, cropped_img.height)
-                square_img = Image.new('RGB', (side_length, side_length), (0, 0, 0))
-                
-                # 将裁剪的图像粘贴到正方形背景上（居中）
-                paste_x = (side_length - cropped_img.width) // 2
-                paste_y = (side_length - cropped_img.height) // 2
-                square_img.paste(cropped_img, (paste_x, paste_y))
-                
-                # 调整大小到指定的最大尺寸
-                square_img = square_img.resize((max_size, max_size), Image.LANCZOS)
-                
                 # 转回张量
-                result_tensor = self._pil_to_tensor(square_img)
-                result.append(result_tensor)
+                result_tensor = self._pil_to_tensor(cropped_img)
+                mask_tensor = torch.from_numpy(np.array(mask).astype(np.float32) / 255.0)
+                
+                result_images.append(result_tensor)
+                result_masks.append(mask_tensor)
             else:
-                # 如果没有检测到头部，返回原图
-                result.append(img)
+                # 如果没有检测到头部，返回原图和空mask
+                result_images.append(img)
+                empty_mask = torch.zeros((original_height, original_width), dtype=torch.float32)
+                result_masks.append(empty_mask)
         
         # 将结果堆叠为批次
-        if len(result) > 0:
-            result_tensor = torch.stack(result)
+        if len(result_images) > 0:
+            result_tensor = torch.stack(result_images)
+            mask_tensor = torch.stack(result_masks)
         else:
             # 如果没有图像处理，返回空张量
             result_tensor = torch.zeros((0, 0, 0, 3), dtype=torch.float32)
+            mask_tensor = torch.zeros((0, 0, 0), dtype=torch.float32)
             
-        return (result_tensor,)
+        return (result_tensor, mask_tensor)
     
     def _tensor_to_pil(self, tensor):
         # 确保tensor在0-1范围内
