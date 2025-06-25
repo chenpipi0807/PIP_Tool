@@ -8,6 +8,8 @@ from .PIP_HeadCrop import PIP_HeadCrop
 from .PIP_PuzzleTool import PIP_PuzzleTool, PIP_DynamicPuzzleSelection
 from .PIP_SearchReplace import PIP_SearchReplace
 from .PIP_Kontext import PIP_Kontext
+from .PIP_workflow_extractor import PIP_WorkflowExtractor
+from .PIP_load_image_url import PIP_LoadImageURL
 
 NODE_CLASS_MAPPINGS = {
     "PIP_longsize": PIP_longsize,
@@ -21,7 +23,9 @@ NODE_CLASS_MAPPINGS = {
     "PIP_PuzzleTool": PIP_PuzzleTool,
     "PIP_DynamicPuzzleSelection": PIP_DynamicPuzzleSelection,
     "PIP_SearchReplace": PIP_SearchReplace,
-    "PIP_Kontext": PIP_Kontext
+    "PIP_Kontext": PIP_Kontext,
+    "PIP_WorkflowExtractor": PIP_WorkflowExtractor,
+    "PIP_LoadImageURL": PIP_LoadImageURL
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -36,5 +40,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PIP_PuzzleTool": "PIP 拼图工具",
     "PIP_DynamicPuzzleSelection": "PIP 拼图动态选择",
     "PIP_SearchReplace": "PIP 搜索替换",
-    "PIP_Kontext": "PIP Kontext AI图像编辑"
+    "PIP_Kontext": "PIP Kontext AI图像编辑",
+    "PIP_WorkflowExtractor": "PIP 工作流变量提取",
+    "PIP_LoadImageURL": "PIP URL图像加载"
 }
