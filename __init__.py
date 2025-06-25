@@ -11,6 +11,7 @@ from .PIP_Kontext import PIP_Kontext
 from .PIP_workflow_extractor import PIP_WorkflowExtractor
 from .PIP_load_image_url import PIP_LoadImageURL
 from .PIP_load_json_url import PIP_LoadJSONURL
+from .PIP_batch_json_extractor import PIP_batchJSONExtractor
 
 NODE_CLASS_MAPPINGS = {
     "PIP_longsize": PIP_longsize,
@@ -27,7 +28,8 @@ NODE_CLASS_MAPPINGS = {
     "PIP_Kontext": PIP_Kontext,
     "PIP_WorkflowExtractor": PIP_WorkflowExtractor,
     "PIP_LoadImageURL": PIP_LoadImageURL,
-    "PIP_LoadJSONURL": PIP_LoadJSONURL
+    "PIP_LoadJSONURL": PIP_LoadJSONURL,
+    "PIP_batchJSONExtractor": PIP_batchJSONExtractor
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -45,5 +47,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PIP_Kontext": "PIP Kontext AI图像编辑",
     "PIP_WorkflowExtractor": "PIP 工作流变量提取",
     "PIP_LoadImageURL": "PIP URL图像加载",
-    "PIP_LoadJSONURL": "PIP URL-JSON加载"
+    "PIP_LoadJSONURL": "PIP URL-JSON加载",
+    "PIP_batchJSONExtractor": "PIP 批次JSON提取器"
 }
