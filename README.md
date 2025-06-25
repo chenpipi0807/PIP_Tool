@@ -27,3 +27,4 @@
 - 从url加载图片
 - 从url加载json
 - 新增xlsx文件转json的脚本
+- 从批次ID读取json
