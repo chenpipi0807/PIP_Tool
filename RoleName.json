@@ -1,0 +1,14 @@
+{
+  "roles": [
+    {"name": "SYS", "type": "system"},
+    {"name": "USR", "type": "user"},
+    {"name": "SPT-M-15", "type": "support", "gender": "male", "age": 15},
+    {"name": "SPT-M-25", "type": "support", "gender": "male", "age": 25},
+    {"name": "SPT-M-35", "type": "support", "gender": "male", "age": 35},
+    {"name": "SPT-M-60", "type": "support", "gender": "male", "age": 60},
+    {"name": "SPT-F-15", "type": "support", "gender": "female", "age": 15},
+    {"name": "SPT-F-25", "type": "support", "gender": "female", "age": 25},
+    {"name": "SPT-F-35", "type": "support", "gender": "female", "age": 35},
+    {"name": "SPT-F-60", "type": "support", "gender": "female", "age": 60}
+  ]
+}
