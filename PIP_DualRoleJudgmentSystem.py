@@ -65,6 +65,11 @@ class PIP_DualRoleJudgmentSystem:
         
         if normalized_str in normalized_roles:
             return normalized_roles[normalized_str]
+            
+        # 特殊处理SPT角色的性别和年龄匹配
+        spt_match = self._match_spt_role(role_str)
+        if spt_match:
+            return spt_match
         
         # 近似匹配
         closest_matches = get_close_matches(role_str.lower(), [r.lower() for r in self.role_names], n=1, cutoff=0.6)
@@ -80,6 +85,55 @@ class PIP_DualRoleJudgmentSystem:
                 
         # 未找到匹配时返回 None
         return None
+    
+    def _match_spt_role(self, role_str):
+        """特殊处理SPT角色的匹配，支持female/male关键词和年龄匹配"""
+        role_str_lower = role_str.lower()
+        
+        # 检查是否包含SPT相关的模式
+        if 'spt' not in role_str_lower:
+            return None
+            
+        # 解析性别
+        gender = None
+        if 'female' in role_str_lower:
+            gender = 'F'
+        elif 'male' in role_str_lower:
+            gender = 'M'
+        
+        # 如果没有识别到性别，返回None
+        if not gender:
+            return None
+            
+        # 提取年龄数字
+        age_match = re.search(r'(\d+)', role_str)
+        target_age = int(age_match.group(1)) if age_match else None
+        
+        # 获取所有SPT角色
+        spt_roles = [role for role in self.role_names if role.startswith('SPT-' + gender + '-')]
+        
+        if not spt_roles:
+            return None
+            
+        # 如果没有指定年龄，返回该性别的第一个角色
+        if target_age is None:
+            return spt_roles[0]
+            
+        # 找到年龄最接近的角色
+        best_match = None
+        min_age_diff = float('inf')
+        
+        for role in spt_roles:
+            # 从角色名中提取年龄 (例如: SPT-F-25 -> 25)
+            role_age_match = re.search(r'SPT-[MF]-(\d+)', role)
+            if role_age_match:
+                role_age = int(role_age_match.group(1))
+                age_diff = abs(target_age - role_age)
+                if age_diff < min_age_diff:
+                    min_age_diff = age_diff
+                    best_match = role
+                    
+        return best_match
 
     def process_roles(self, condition, **kwargs):
         """处理条件并返回对应的图像"""
