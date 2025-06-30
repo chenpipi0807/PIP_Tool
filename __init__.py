@@ -15,6 +15,7 @@ from .PIP_load_json_url import PIP_LoadJSONURL
 from .PIP_batch_json_extractor import PIP_batchJSONExtractor
 from .PIP_DualRoleJudgmentSystem import PIP_DualRoleJudgmentSystem
 from .PIP_novel_batch_validator import PIP_NovelBatchValidator
+from .PIP_TextToImage import PIP_TextToImage
 
 NODE_CLASS_MAPPINGS = {
     "PIP_longsize": PIP_longsize,
@@ -36,7 +37,8 @@ NODE_CLASS_MAPPINGS = {
     "PIP_LoadJSONURL": PIP_LoadJSONURL,
     "PIP_batchJSONExtractor": PIP_batchJSONExtractor,
     "PIP_DualRoleJudgmentSystem": PIP_DualRoleJudgmentSystem,
-    "PIP_NovelBatchValidator": PIP_NovelBatchValidator
+    "PIP_NovelBatchValidator": PIP_NovelBatchValidator,
+    "PIP_TextToImage": PIP_TextToImage
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -59,5 +61,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PIP_LoadJSONURL": "PIP URL-JSON加载",
     "PIP_batchJSONExtractor": "PIP 批次JSON提取器",
     "PIP_DualRoleJudgmentSystem": "PIP 双角色判断系统",
-    "PIP_NovelBatchValidator": "novel小说批次验证专用"
+    "PIP_NovelBatchValidator": "novel小说批次验证专用",
+    "PIP_TextToImage": "PIP 文本转图像"
 }
