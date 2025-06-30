@@ -6,6 +6,7 @@ from .PIP_seamless_concatenation import PIP_SeamlessConcatenation
 from .PIP_Grayscale import PIP_Grayscale
 from .PIP_HeadCrop import PIP_HeadCrop
 from .PIP_PuzzleTool import PIP_PuzzleTool, PIP_DynamicPuzzleSelection
+from .PIP_PuzzleTool_Enhanced import PIP_PuzzleTool_Enhanced, PIP_DynamicPuzzleSelection_Enhanced
 from .PIP_SearchReplace import PIP_SearchReplace
 from .PIP_Kontext import PIP_Kontext
 from .PIP_workflow_extractor import PIP_WorkflowExtractor
@@ -13,6 +14,7 @@ from .PIP_load_image_url import PIP_LoadImageURL
 from .PIP_load_json_url import PIP_LoadJSONURL
 from .PIP_batch_json_extractor import PIP_batchJSONExtractor
 from .PIP_DualRoleJudgmentSystem import PIP_DualRoleJudgmentSystem
+from .PIP_novel_batch_validator import PIP_NovelBatchValidator
 
 NODE_CLASS_MAPPINGS = {
     "PIP_longsize": PIP_longsize,
@@ -25,13 +27,16 @@ NODE_CLASS_MAPPINGS = {
     "PIP_HeadCrop": PIP_HeadCrop,
     "PIP_PuzzleTool": PIP_PuzzleTool,
     "PIP_DynamicPuzzleSelection": PIP_DynamicPuzzleSelection,
+    "PIP_PuzzleTool_Enhanced": PIP_PuzzleTool_Enhanced,
+    "PIP_DynamicPuzzleSelection_Enhanced": PIP_DynamicPuzzleSelection_Enhanced,
     "PIP_SearchReplace": PIP_SearchReplace,
     "PIP_Kontext": PIP_Kontext,
     "PIP_WorkflowExtractor": PIP_WorkflowExtractor,
     "PIP_LoadImageURL": PIP_LoadImageURL,
     "PIP_LoadJSONURL": PIP_LoadJSONURL,
     "PIP_batchJSONExtractor": PIP_batchJSONExtractor,
-    "PIP_DualRoleJudgmentSystem": PIP_DualRoleJudgmentSystem
+    "PIP_DualRoleJudgmentSystem": PIP_DualRoleJudgmentSystem,
+    "PIP_NovelBatchValidator": PIP_NovelBatchValidator
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -45,11 +50,14 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PIP_HeadCrop": "PIP 人脸检测",
     "PIP_PuzzleTool": "PIP 拼图工具",
     "PIP_DynamicPuzzleSelection": "PIP 拼图动态选择",
+    "PIP_PuzzleTool_Enhanced": "PIP 拼图工具 (增强版支持URL)",
+    "PIP_DynamicPuzzleSelection_Enhanced": "PIP 拼图动态选择 (增强版支持URL)",
     "PIP_SearchReplace": "PIP 搜索替换",
     "PIP_Kontext": "PIP Kontext AI图像编辑",
     "PIP_WorkflowExtractor": "PIP 工作流变量提取",
     "PIP_LoadImageURL": "PIP URL图像加载",
     "PIP_LoadJSONURL": "PIP URL-JSON加载",
     "PIP_batchJSONExtractor": "PIP 批次JSON提取器",
-    "PIP_DualRoleJudgmentSystem": "PIP 双角色判断系统"
+    "PIP_DualRoleJudgmentSystem": "PIP 双角色判断系统",
+    "PIP_NovelBatchValidator": "novel小说批次验证专用"
 }
