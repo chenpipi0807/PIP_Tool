@@ -35,6 +35,8 @@ class PIP_HeadCrop:
         # 获取当前文件所在的目录
         self.current_dir = os.path.dirname(os.path.abspath(__file__))
         self.model_path = os.path.join(self.current_dir, "models", "face_detect_v0_n", "model.pt")
+        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        self.fallback_to_cpu = False  # 标记是否需要使用CPU回退
         
         # 检查模型文件是否存在
         if not os.path.exists(self.model_path):
@@ -45,7 +47,7 @@ class PIP_HeadCrop:
                 # 加载YOLO模型
                 if has_ultralytics:
                     self.model = YOLO(self.model_path)
-                    print("YOLO模型加载成功！")
+                    print(f"YOLO模型加载成功！（设备：{self.device}）")
                 else:
                     self.model = None
                     print("未能加载YOLO模型，缺少ultralytics库")
@@ -109,22 +111,28 @@ class PIP_HeadCrop:
             # 转换为OpenCV格式进行处理
             cv_img = cv2.cvtColor(np.array(pil_img), cv2.COLOR_RGB2BGR)
             
-            # 运行YOLO模型进行人脸检测
-            detections = self.model(cv_img, verbose=False)
+            # 运行YOLO模型进行人脸检测（智能设备选择）
+            detections = self._smart_inference(cv_img)
             
             # 提取所有检测到的头部
             heads = []
             for det in detections:
-                boxes = det.boxes
-                if len(boxes) > 0:
-                    for box in boxes:
-                        # 获取边界框坐标
-                        x1, y1, x2, y2 = box.xyxy[0].cpu().numpy().astype(int)
-                        confidence = float(box.conf[0].cpu().numpy())
-                        
-                        # 计算边界框面积
-                        area = (x2 - x1) * (y2 - y1)
-                        heads.append((x1, y1, x2, y2, area, confidence))
+                # 检查是否是空检测结果
+                if hasattr(det, 'boxes') and det.boxes is not None:
+                    boxes = det.boxes
+                    if len(boxes) > 0:
+                        for box in boxes:
+                            # 获取边界框坐标
+                            x1, y1, x2, y2 = box.xyxy[0].cpu().numpy().astype(int)
+                            confidence = float(box.conf[0].cpu().numpy())
+                            
+                            # 计算边界框面积
+                            area = (x2 - x1) * (y2 - y1)
+                            heads.append((x1, y1, x2, y2, area, confidence))
+                else:
+                    # 处理空检测结果的情况
+                    print("检测到空结果，跳过该检测")
+                    continue
             
             if heads:
                 # 选择面积最大的头部
@@ -193,3 +201,67 @@ class PIP_HeadCrop:
         img_np = np.array(pil_img).astype(np.float32) / 255.0
         # 转为PyTorch张量
         return torch.from_numpy(img_np)
+    
+    def _smart_inference(self, cv_img):
+        """
+        智能推理：优先使用CUDA，遇到NMS兼容性问题时自动回退到CPU
+        如果仍然失败，则使用更低的置信度和兼容性设置
+        """
+        # 如果已经标记需要使用CPU回退，直接使用CPU
+        if self.fallback_to_cpu:
+            try:
+                return self.model(cv_img, verbose=False, device='cpu')
+            except Exception as e:
+                # 如果CPU也失败，尝试使用更兼容的设置
+                print(f"CPU模式也失败，尝试兼容性设置: {e}")
+                return self._fallback_inference(cv_img)
+        
+        # 尝试使用首选设备（通常是CUDA）
+        try:
+            return self.model(cv_img, verbose=False, device=self.device)
+        except Exception as e:
+            # 检查是否是NMS兼容性问题
+            error_msg = str(e)
+            if "torchvision::nms" in error_msg:
+                print(f"检测到NMS兼容性问题，自动回退到CPU模式")
+                self.fallback_to_cpu = True
+                self.device = 'cpu'  # 更新设备状态
+                try:
+                    return self.model(cv_img, verbose=False, device='cpu')
+                except Exception as cpu_error:
+                    print(f"CPU回退也失败，使用兼容性推理: {cpu_error}")
+                    return self._fallback_inference(cv_img)
+            else:
+                # 其他类型的错误，直接抛出
+                raise e
+    
+    def _fallback_inference(self, cv_img):
+        """
+        终极回退方案：使用更低的设置和兼容性模式
+        """
+        try:
+            # 尝试使用更低的置信度和不同的参数设置
+            print("尝试使用兼容性推理设置...")
+            # 降低置信度，增加兼容性
+            return self.model(cv_img, verbose=False, device='cpu', conf=0.1, iou=0.7, half=False)
+        except Exception as e1:
+            try:
+                # 最后的尝试：使用最基本的设置
+                print(f"兼容性推理失败: {e1}，尝试最基本设置...")
+                return self.model.predict(cv_img, verbose=False, device='cpu', save=False, conf=0.25)
+            except Exception as e2:
+                # 如果所有方法都失败，返回空结果但不崩溃
+                print(f"所有推理方法都失败: {e2}，返回空检测结果")
+                # 创建一个空的检测结果对象，防止后续代码崩溃
+                class EmptyResult:
+                    def __init__(self):
+                        self.boxes = None
+                        self.xyxy = []
+                        
+                    def __len__(self):
+                        return 0
+                        
+                    def __getitem__(self, index):
+                        return []
+                
+                return [EmptyResult()]
