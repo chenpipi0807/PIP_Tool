@@ -33,3 +33,15 @@
 - 拼图工具增强版增加对于kontext输出的RGBA的支持
 - 小说批次验证（通过批次ID截取json）
 - RGBA转RGB
+
+
+
+## 记一些傻逼状况
+
+.\python_embeded\python.exe -m pip install "C:\NMDtorch\torch-2.7.1+cu128-cp312-cp312-win_amd64.whl" --force-reinstall
+
+.\python_embeded\python.exe -m pip install "C:\NMDtorch\torchvision-0.22.1+cu128-cp312-cp312-win_amd64.whl" --force-reinstall --no-deps
+
+.\python_embeded\python.exe -m pip install "C:\NMDtorch\torchaudio-2.7.1+cu128-cp312-cp312-win_amd64.whl" --force-reinstall
+
+.\python_embeded\python.exe -c "import torch; print('PyTorch:', torch.__version__); print('CUDA available:', torch.cuda.is_available())"
