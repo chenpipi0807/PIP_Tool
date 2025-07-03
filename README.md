@@ -34,6 +34,7 @@
 - 小说批次验证（通过批次ID截取json）
 - RGBA转RGB
 - 保存txt到output
+- 图像转像素化的无聊功能
 
 
 
