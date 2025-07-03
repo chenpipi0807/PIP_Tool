@@ -18,6 +18,7 @@ from .PIP_novel_batch_validator import PIP_NovelBatchValidator
 from .PIP_TextToImage import PIP_TextToImage
 from .PIP_RGBA_to_RGB import PIP_RGBA_to_RGB, PIP_RGBAtoRGB
 from .PIP_SaveTxt import PIP_SaveTxt
+from .PIP_Pixelate import PIP_Pixelate, PIP_PixelateAdvanced
 
 NODE_CLASS_MAPPINGS = {
     "PIP_longsize": PIP_longsize,
@@ -43,7 +44,9 @@ NODE_CLASS_MAPPINGS = {
     "PIP_TextToImage": PIP_TextToImage,
     "PIP_RGBA_to_RGB": PIP_RGBA_to_RGB,
     "PIP_RGBAtoRGB": PIP_RGBAtoRGB,
-    "PIP_SaveTxt": PIP_SaveTxt
+    "PIP_SaveTxt": PIP_SaveTxt,
+    "PIP_Pixelate": PIP_Pixelate,
+    "PIP_PixelateAdvanced": PIP_PixelateAdvanced
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -70,5 +73,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PIP_TextToImage": "PIP 文本转图像",
     "PIP_RGBA_to_RGB": "PIP RGBA转RGB",
     "PIP_RGBAtoRGB": "PIP RGBA转RGB (简化版)",
-    "PIP_SaveTxt": "PIP 保存文本"
+    "PIP_SaveTxt": "PIP 保存文本",
+    "PIP_Pixelate": "PIP 像素化",
+    "PIP_PixelateAdvanced": "PIP 像素化 (高级版)"
 }
