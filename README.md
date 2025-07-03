@@ -33,6 +33,7 @@
 - 拼图工具增强版增加对于kontext输出的RGBA的支持
 - 小说批次验证（通过批次ID截取json）
 - RGBA转RGB
+- 保存txt到output
 
 
 
