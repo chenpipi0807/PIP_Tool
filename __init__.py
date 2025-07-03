@@ -17,6 +17,7 @@ from .PIP_DualRoleJudgmentSystem import PIP_DualRoleJudgmentSystem
 from .PIP_novel_batch_validator import PIP_NovelBatchValidator
 from .PIP_TextToImage import PIP_TextToImage
 from .PIP_RGBA_to_RGB import PIP_RGBA_to_RGB, PIP_RGBAtoRGB
+from .PIP_SaveTxt import PIP_SaveTxt
 
 NODE_CLASS_MAPPINGS = {
     "PIP_longsize": PIP_longsize,
@@ -41,7 +42,8 @@ NODE_CLASS_MAPPINGS = {
     "PIP_NovelBatchValidator": PIP_NovelBatchValidator,
     "PIP_TextToImage": PIP_TextToImage,
     "PIP_RGBA_to_RGB": PIP_RGBA_to_RGB,
-    "PIP_RGBAtoRGB": PIP_RGBAtoRGB
+    "PIP_RGBAtoRGB": PIP_RGBAtoRGB,
+    "PIP_SaveTxt": PIP_SaveTxt
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -67,5 +69,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PIP_NovelBatchValidator": "novel小说批次验证专用",
     "PIP_TextToImage": "PIP 文本转图像",
     "PIP_RGBA_to_RGB": "PIP RGBA转RGB",
-    "PIP_RGBAtoRGB": "PIP RGBA转RGB (简化版)"
+    "PIP_RGBAtoRGB": "PIP RGBA转RGB (简化版)",
+    "PIP_SaveTxt": "PIP 保存文本"
 }
