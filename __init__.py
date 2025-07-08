@@ -20,6 +20,7 @@ from .PIP_RGBA_to_RGB import PIP_RGBA_to_RGB, PIP_RGBAtoRGB
 from .PIP_SaveTxt import PIP_SaveTxt
 from .PIP_Pixelate import PIP_Pixelate, PIP_PixelateAdvanced
 from .PIP_DynamicPrompt import PIP_DynamicPrompt
+from .PIP_EdgeExpand import PIP_EdgeExpand
 
 NODE_CLASS_MAPPINGS = {
     "PIP_longsize": PIP_longsize,
@@ -48,7 +49,8 @@ NODE_CLASS_MAPPINGS = {
     "PIP_SaveTxt": PIP_SaveTxt,
     "PIP_Pixelate": PIP_Pixelate,
     "PIP_PixelateAdvanced": PIP_PixelateAdvanced,
-    "PIP_DynamicPrompt": PIP_DynamicPrompt
+    "PIP_DynamicPrompt": PIP_DynamicPrompt,
+    "PIP_EdgeExpand": PIP_EdgeExpand
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -78,5 +80,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PIP_SaveTxt": "PIP 保存文本",
     "PIP_Pixelate": "PIP 像素化",
     "PIP_PixelateAdvanced": "PIP 像素化 (高级版)",
-    "PIP_DynamicPrompt": "PIP 动态提示词"
+    "PIP_DynamicPrompt": "PIP 动态提示词",
+    "PIP_EdgeExpand": "PIP 边缘扩图"
 }
