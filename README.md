@@ -5,6 +5,8 @@
 ![image](https://github.com/user-attachments/assets/4f8bbbf3-3e0f-4b0c-92ed-edbffac26a04)
 ![image](https://github.com/user-attachments/assets/a864adfb-46ce-49d8-ab22-7c675756c24d)
 ![image](https://github.com/user-attachments/assets/b790341d-22cd-42bf-b1ce-e93e726c8801)
+<img width="2752" height="1722" alt="image" src="https://github.com/user-attachments/assets/25367bae-77c6-4f48-b687-edcfa20a2381" />
+
 
 
 
@@ -37,6 +39,8 @@
 - 图像转像素化的无聊功能
 - 动态提示词支持多级嵌套（备注下用法{|/\},嗯我必能想起来咋用）
 - 边缘纯色扩充（单方向扩充H,双方向从中心扩充H/2）
+- 亮度检测
+- 亮度补偿
 
 
 
