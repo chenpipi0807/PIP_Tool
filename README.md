@@ -42,6 +42,7 @@
 - 亮度检测
 - 亮度补偿
 - PIP 自定义扩图（mask）
+- 新增了字节的Seed-X-Instruct-7B，模型去huggingface下，部分配置文件有调整，速度挺快的，支持多语言
 
 
 
