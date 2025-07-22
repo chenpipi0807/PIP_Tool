@@ -1,5 +1,7 @@
 ## 自用的comfyui节点汇总，有BUG但可以不改嘿嘿
 ![image](https://github.com/user-attachments/assets/276c33dd-5fda-4d75-bbf4-9cbc312c6068)
+<img width="3361" height="1470" alt="image" src="https://github.com/user-attachments/assets/1d310277-74d3-482e-9424-dfb2d22af989" />
+
 ![image](https://github.com/user-attachments/assets/f80ad400-1cc8-4dc3-b356-3f43b53ec696)
 ![image](https://github.com/user-attachments/assets/747b5ac8-86f2-4896-9a62-5de6a7e6ddf0)
 ![image](https://github.com/user-attachments/assets/4f8bbbf3-3e0f-4b0c-92ed-edbffac26a04)
