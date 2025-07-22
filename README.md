@@ -45,7 +45,9 @@
 
 
 
-## 记一些傻逼状况
+## 记一些蛇皮问题
+
+--force-reinstall（强制安装--适用于python环境复杂的情况）
 
 .\python_embeded\python.exe -m pip install "C:\NMDtorch\torch-2.7.1+cu128-cp312-cp312-win_amd64.whl" --force-reinstall
 
