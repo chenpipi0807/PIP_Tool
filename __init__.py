@@ -24,6 +24,16 @@ from .PIP_EdgeExpand import PIP_EdgeExpand
 from .PIP_CustomExpand import PIP_CustomExpand
 from .PIP_BrightnessAnalysis import PIP_BrightnessAnalysis
 from .PIP_BrightnessCorrection import PIP_BrightnessCorrection
+# Simple node removed - vLLM node provides better performance
+
+# 尝试导入vLLM版本（可选）
+try:
+    from .PIP_SeedX_Translate_vLLM import PIP_SeedX_Translate_vLLM
+    VLLM_NODE_AVAILABLE = True
+except ImportError:
+    print("PIP_SeedX_Translate_vLLM not available (vLLM not installed)")
+    VLLM_NODE_AVAILABLE = False
+    PIP_SeedX_Translate_vLLM = None
 
 NODE_CLASS_MAPPINGS = {
     "PIP_longsize": PIP_longsize,
@@ -59,6 +69,10 @@ NODE_CLASS_MAPPINGS = {
     "PIP_BrightnessCorrection": PIP_BrightnessCorrection
 }
 
+# 有条件地添加vLLM节点
+if VLLM_NODE_AVAILABLE:
+    NODE_CLASS_MAPPINGS["PIP_SeedX_Translate_vLLM"] = PIP_SeedX_Translate_vLLM
+
 NODE_DISPLAY_NAME_MAPPINGS = {
     "PIP_longsize": "PIP 长边调整",
     "PIP_ProportionalCrop": "PIP 等比例裁切",
@@ -92,3 +106,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PIP_BrightnessAnalysis": "PIP 亮度检测",
     "PIP_BrightnessCorrection": "PIP 亮度补偿"
 }
+
+# 有条件地添加vLLM节点显示名称
+if VLLM_NODE_AVAILABLE:
+    NODE_DISPLAY_NAME_MAPPINGS["PIP_SeedX_Translate_vLLM"] = "PIP Seed-X 翻译 (vLLM)"
