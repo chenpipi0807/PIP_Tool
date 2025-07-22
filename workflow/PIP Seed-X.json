@@ -1,0 +1,799 @@
+{
+  "id": "394ed254-7306-42a2-9ae6-aa880ce4456d",
+  "revision": 0,
+  "last_node_id": 2172,
+  "last_link_id": 6065,
+  "nodes": [
+    {
+      "id": 2172,
+      "type": "Note",
+      "pos": [
+        1432.19482421875,
+        1767.03857421875
+      ],
+      "size": [
+        755.3847045898438,
+        578.2708129882812
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "根据Seed-X模型的特点和官方推荐，以下是各参数的最佳设置建议：\n\n🎯 推荐参数设置\n核心参数\ntarget_language: 中文 (根据需要选择目标语言)\nmax_length: 512 ✅ (当前设置很好，适合大部分翻译)\ntemperature: 0.7 ✅ (当前设置合适，平衡创造性和准确性)\n生成模式选择\ndo_sample: false ✅ (当前设置正确)\nnum_beams: 4 ✅ (官方推荐，当前设置完美)\n可选功能\nenable_cot: false ✅ (一般翻译保持false，复杂文本可开启)\nmodel_path: models/Seed-X-Instruct-7B ✅ (保持默认即可)\n📋 不同场景的优化设置\n日常翻译 (推荐)\ndo_sample: false\nnum_beams: 4\ntemperature: 0.7\nmax_length: 512\nenable_cot: false\n长文本翻译\ndo_sample: false\nnum_beams: 4\ntemperature: 0.5 (更保守)\nmax_length: 1024 (增加长度)\nenable_cot: false\n创意文本翻译\ndo_sample: true\nnum_beams: 1\ntemperature: 0.8-1.0 (增加创造性)\nmax_length: 512\nenable_cot: false\n复杂技术文档\ndo_sample: false\nnum_beams: 6-8 (更多beam)\ntemperature: 0.3 (更保守)\nmax_length: 1024\nenable_cot: true (开启思维链)\n⚡ 性能优化建议\nbeam search优于sampling - 保持do_sample=false\nnum_beams=4是最佳平衡点 - 质量和速度的完美平衡\ntemperature=0.7适合大部分场景 - 既保证准确性又有适度灵活性\nmax_length根据文本长度调整 - 短文本512，长文本1024"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 2168,
+      "type": "PIP_SeedX_Translate_vLLM",
+      "pos": [
+        1907.49853515625,
+        2431.755126953125
+      ],
+      "size": [
+        400,
+        256
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 6063
+        }
+      ],
+      "outputs": [
+        {
+          "name": "translated_text",
+          "type": "STRING",
+          "links": [
+            6061
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "chenpipi0807/PIP_Tool",
+        "ver": "b66e80258ec17dce5a4dd12716ec50f4a1c97c3f",
+        "Node name for S&R": "PIP_SeedX_Translate_vLLM"
+      },
+      "widgets_values": [
+        "Hello, how are you today?",
+        "한국어",
+        512,
+        0.7,
+        false,
+        4,
+        false,
+        "models/Seed-X-Instruct-7B"
+      ]
+    },
+    {
+      "id": 2171,
+      "type": "String Literal",
+      "pos": [
+        1431.0367431640625,
+        2446.141357421875
+      ],
+      "size": [
+        414.74151611328125,
+        585.736328125
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            6063
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-image-saver",
+        "ver": "65e6903eff274a50f8b5cd768f0f96baf37baea1",
+        "Node name for S&R": "String Literal"
+      },
+      "widgets_values": [
+        "根据Seed-X模型的特点和官方推荐，以下是各参数的最佳设置建议：\n\n🎯 推荐参数设置\n核心参数\ntarget_language: 中文 (根据需要选择目标语言)\nmax_length: 512 ✅ (当前设置很好，适合大部分翻译)\ntemperature: 0.7 ✅ (当前设置合适，平衡创造性和准确性)\n生成模式选择\ndo_sample: false ✅ (当前设置正确)\nnum_beams: 4 ✅ (官方推荐，当前设置完美)\n可选功能\nenable_cot: false ✅ (一般翻译保持false，复杂文本可开启)\nmodel_path: models/Seed-X-Instruct-7B ✅ (保持默认即可)\n📋 不同场景的优化设置\n日常翻译 (推荐)\ndo_sample: false\nnum_beams: 4\ntemperature: 0.7\nmax_length: 512\nenable_cot: false\n长文本翻译\ndo_sample: false\nnum_beams: 4\ntemperature: 0.5 (更保守)\nmax_length: 1024 (增加长度)\nenable_cot: false\n创意文本翻译\ndo_sample: true\nnum_beams: 1\ntemperature: 0.8-1.0 (增加创造性)\nmax_length: 512\nenable_cot: false\n复杂技术文档\ndo_sample: false\nnum_beams: 6-8 (更多beam)\ntemperature: 0.3 (更保守)\nmax_length: 1024\nenable_cot: true (开启思维链)\n⚡ 性能优化建议\nbeam search优于sampling - 保持do_sample=false\nnum_beams=4是最佳平衡点 - 质量和速度的完美平衡\ntemperature=0.7适合大部分场景 - 既保证准确性又有适度灵活性\nmax_length根据文本长度调整 - 短文本512，长文本1024"
+      ]
+    },
+    {
+      "id": 2159,
+      "type": "easy showAnything",
+      "pos": [
+        2371.079345703125,
+        2434.869384765625
+      ],
+      "size": [
+        531.1688842773438,
+        531.4321899414062
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 6061
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "17b163e234024384aa32675d8a52e1cc30dac7f6",
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "Seed-X 모형의 특성 및 공식 권장 사항에 따라, 각 매개변수의 최적 설정 방법은 다음과 같습니다:\n\n🎯 권장 매개변수 설정\n핵심 매개변수\ntarget_language: 중국어 (원하는 언어를 선택하세요)\nmax_length: 512 ✅ (현재 설정은 대부분의 번역에 적합합니다.)\ntemperature: 0.7 ✅ (현재 설정은 창의성과 정확성의 절충이 잘 되어 있습니다.)\n생성 모드 선택\ndo_sample: false ✅ (현재 설정은 올바르게 되어 있습니다.)\nnum_beams: 4 ✅ (공식 권장 사항이며, 현재 설정은 완벽합니다.)\n선택적 기능\nenable_cot: false ✅ (일반적인 번역에서는 false로 유지하고 복잡한 텍스트에서만 활성화하십시오.)\nmodel_path: models/Seed-X-Instruct-7B ✅ (기본값을 유지하십시오.)\n📋 서로 다른 시나리오의 최적화 설정\n일반 번역 (권장)\ndo_sample: false\nnum_beams: 4\ntemperature: 0.7\nmax_length: 512\nenable_cot: false\n장문 번역\ndo_sample: false\nnum_beams: 4\ntemperature: 0.5 (더 보수적으로)\nmax_length: 1024 (길이를 늘리십시오.)\nenable_cot: false\n창의적인 텍스트 번역\ndo_sample: true\nnum_beams: 1\ntemperature: 0.8-1.0 (창의성을 늘리십시오.)\nmax_length: 512\nenable_cot: false\n복잡한 기술 문서\ndo_sample: false\nnum_beams: 6-8 (더 많은 beam을 사용하십시오.)\ntemperature: 0.3 (더 보수"
+      ]
+    }
+  ],
+  "links": [
+    [
+      6061,
+      2168,
+      0,
+      2159,
+      0,
+      "*"
+    ],
+    [
+      6063,
+      2171,
+      0,
+      2168,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.4420993610651245,
+      "offset": [
+        -1354.3616197983251,
+        -2014.392967779691
+      ]
+    },
+    "frontendVersion": "1.23.4",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "prompt": {
+      "7": {
+        "inputs": {
+          "text": "low quality, worst quality, deformed, distorted, disfigured, motion smear, motion artifacts, fused fingers, bad anatomy, weird hand, ugly",
+          "clip": [
+            "38",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Negative Prompt)"
+        }
+      },
+      "38": {
+        "inputs": {
+          "clip_name": "t5xxl_fp16.safetensors",
+          "type": "ltxv",
+          "device": "default"
+        },
+        "class_type": "CLIPLoader",
+        "_meta": {
+          "title": "Load CLIP"
+        }
+      },
+      "73": {
+        "inputs": {
+          "sampler_name": "euler_ancestral"
+        },
+        "class_type": "KSamplerSelect",
+        "_meta": {
+          "title": "KSamplerSelect"
+        }
+      },
+      "1241": {
+        "inputs": {
+          "frame_rate": 24.000000000000004,
+          "positive": [
+            "2137",
+            0
+          ],
+          "negative": [
+            "7",
+            0
+          ]
+        },
+        "class_type": "LTXVConditioning",
+        "_meta": {
+          "title": "LTXVConditioning"
+        }
+      },
+      "1336": {
+        "inputs": {
+          "frame_rate": 24,
+          "loop_count": 0,
+          "filename_prefix": "ltxv-base",
+          "format": "video/h264-mp4",
+          "pix_fmt": "yuv420p",
+          "crf": 19,
+          "save_metadata": false,
+          "trim_to_audio": false,
+          "pingpong": false,
+          "save_output": false,
+          "images": [
+            "2146",
+            0
+          ]
+        },
+        "class_type": "VHS_VideoCombine",
+        "_meta": {
+          "title": "Video Combine 🎥🅥🅗🅢"
+        }
+      },
+      "1507": {
+        "inputs": {
+          "noise_seed": 0
+        },
+        "class_type": "RandomNoise",
+        "_meta": {
+          "title": "RandomNoise"
+        }
+      },
+      "1598": {
+        "inputs": {
+          "noise_seed": 1625
+        },
+        "class_type": "RandomNoise",
+        "_meta": {
+          "title": "RandomNoise"
+        }
+      },
+      "1691": {
+        "inputs": {
+          "samples": [
+            "2118",
+            0
+          ],
+          "upscale_model": [
+            "1828",
+            0
+          ],
+          "vae": [
+            "1896",
+            2
+          ]
+        },
+        "class_type": "LTXVLatentUpsampler",
+        "_meta": {
+          "title": "🅛🅣🅧 LTXV Latent Upsampler"
+        }
+      },
+      "1828": {
+        "inputs": {
+          "upscale_model": "ltxv-spatial-upscaler-0.9.8.safetensors",
+          "spatial_upsample": true,
+          "temporal_upsample": false
+        },
+        "class_type": "LTXVLatentUpsamplerModelLoader",
+        "_meta": {
+          "title": "🅛🅣🅧 LTXV Latent Upsampler Model Loader"
+        }
+      },
+      "1870": {
+        "inputs": {
+          "timestep": 0.05000000000000001,
+          "scale": 0.025000000000000005,
+          "seed": 42,
+          "vae": [
+            "1896",
+            2
+          ]
+        },
+        "class_type": "Set VAE Decoder Noise",
+        "_meta": {
+          "title": "🅛🅣🅧 Set VAE Decoder Noise"
+        }
+      },
+      "1871": {
+        "inputs": {
+          "skip_steps_sigma_threshold": 0.9970000000000002,
+          "cfg_star_rescale": true,
+          "sigmas": "1",
+          "cfg_values": "1",
+          "stg_scale_values": "0",
+          "stg_rescale_values": "1",
+          "stg_layers_indices": "[42]",
+          "model": [
+            "2122",
+            0
+          ],
+          "positive": [
+            "1241",
+            0
+          ],
+          "negative": [
+            "1241",
+            1
+          ],
+          "preset": [
+            "2116",
+            0
+          ]
+        },
+        "class_type": "STGGuiderAdvanced",
+        "_meta": {
+          "title": "🅛🅣🅧 STG Guider Advanced"
+        }
+      },
+      "1896": {
+        "inputs": {
+          "ckpt_name": "ltxv-13b-0.9.8-distilled.safetensors"
+        },
+        "class_type": "CheckpointLoaderSimple",
+        "_meta": {
+          "title": "Load Checkpoint"
+        }
+      },
+      "1921": {
+        "inputs": {
+          "skip_steps_sigma_threshold": 0.9970000000000002,
+          "cfg_star_rescale": true,
+          "sigmas": "1",
+          "cfg_values": "1",
+          "stg_scale_values": "0,0,0,0,0,0",
+          "stg_rescale_values": "1",
+          "stg_layers_indices": "[25]",
+          "model": [
+            "1896",
+            0
+          ],
+          "positive": [
+            "1241",
+            0
+          ],
+          "negative": [
+            "1241",
+            1
+          ],
+          "preset": [
+            "1967",
+            0
+          ]
+        },
+        "class_type": "STGGuiderAdvanced",
+        "_meta": {
+          "title": "🅛🅣🅧 STG Guider Advanced"
+        }
+      },
+      "1926": {
+        "inputs": {
+          "sampler_name": "euler_ancestral"
+        },
+        "class_type": "KSamplerSelect",
+        "_meta": {
+          "title": "KSamplerSelect"
+        }
+      },
+      "1949": {
+        "inputs": {
+          "sigmas": [
+            "1953",
+            0
+          ]
+        },
+        "class_type": "PrintSigmas",
+        "_meta": {
+          "title": "PrintSigmas"
+        }
+      },
+      "1952": {
+        "inputs": {
+          "string": "1.0000, 0.9937, 0.9875, 0.9812, 0.9750, 0.9094, 0.7250, 0.4219, 0.0\n"
+        },
+        "class_type": "StringToFloatList",
+        "_meta": {
+          "title": "String to Float List"
+        }
+      },
+      "1953": {
+        "inputs": {
+          "float_list": [
+            "1952",
+            0
+          ]
+        },
+        "class_type": "FloatToSigmas",
+        "_meta": {
+          "title": "Float To Sigmas"
+        }
+      },
+      "1960": {
+        "inputs": {
+          "image": "R8_FLUX_XLABS_00001_ copy.webp"
+        },
+        "class_type": "LoadImage",
+        "_meta": {
+          "title": "Load Image"
+        }
+      },
+      "1967": {
+        "inputs": {
+          "preset": "13b Distilled"
+        },
+        "class_type": "STGAdvancedPresets",
+        "_meta": {
+          "title": "🅛🅣🅧 STG Advanced Presets"
+        }
+      },
+      "1973": {
+        "inputs": {
+          "frame_rate": 24,
+          "loop_count": 0,
+          "filename_prefix": "ltxv-ic-lora",
+          "format": "video/h264-mp4",
+          "pix_fmt": "yuv420p",
+          "crf": 19,
+          "save_metadata": true,
+          "trim_to_audio": false,
+          "pingpong": false,
+          "save_output": true,
+          "images": [
+            "2127",
+            0
+          ]
+        },
+        "class_type": "VHS_VideoCombine",
+        "_meta": {
+          "title": "Video Combine 🎥🅥🅗🅢"
+        }
+      },
+      "2072": {
+        "inputs": {
+          "string": "0.99, 0.9094, 0.0"
+        },
+        "class_type": "StringToFloatList",
+        "_meta": {
+          "title": "String to Float List"
+        }
+      },
+      "2073": {
+        "inputs": {
+          "float_list": [
+            "2072",
+            0
+          ]
+        },
+        "class_type": "FloatToSigmas",
+        "_meta": {
+          "title": "Float To Sigmas"
+        }
+      },
+      "2116": {
+        "inputs": {
+          "preset": "13b Distilled"
+        },
+        "class_type": "STGAdvancedPresets",
+        "_meta": {
+          "title": "🅛🅣🅧 STG Advanced Presets"
+        }
+      },
+      "2117": {
+        "inputs": {
+          "timestep": 0.05,
+          "scale": 0.025,
+          "seed": 42,
+          "vae": [
+            "1896",
+            2
+          ]
+        },
+        "class_type": "Set VAE Decoder Noise",
+        "_meta": {
+          "title": "🅛🅣🅧 Set VAE Decoder Noise"
+        }
+      },
+      "2118": {
+        "inputs": {
+          "guiding_strength": 1,
+          "temporal_tile_size": 120,
+          "temporal_overlap": 32,
+          "temporal_overlap_cond_strength": 0.5,
+          "horizontal_tiles": 1,
+          "vertical_tiles": 1,
+          "spatial_overlap": 1,
+          "adain_factor": 0.25000000000000006,
+          "optional_negative_index": -1,
+          "optional_negative_index_strength": 1,
+          "per_tile_seed_offsets": "0",
+          "per_tile_use_negative_latents": "1",
+          "model": [
+            "1896",
+            0
+          ],
+          "vae": [
+            "1896",
+            2
+          ],
+          "noise": [
+            "1507",
+            0
+          ],
+          "sampler": [
+            "73",
+            0
+          ],
+          "sigmas": [
+            "1949",
+            0
+          ],
+          "guider": [
+            "1921",
+            0
+          ],
+          "latents": [
+            "2119",
+            0
+          ],
+          "optional_cond_image": [
+            "1960",
+            0
+          ],
+          "optional_positive_conditionings": [
+            "2136",
+            0
+          ],
+          "optional_negative_index_latents": [
+            "2143",
+            0
+          ]
+        },
+        "class_type": "LTXVLoopingSampler",
+        "_meta": {
+          "title": "🅛🅣🅧 LTXV Looping Sampler"
+        }
+      },
+      "2119": {
+        "inputs": {
+          "width": [
+            "2140",
+            0
+          ],
+          "height": [
+            "2141",
+            0
+          ],
+          "length": 361,
+          "batch_size": 1
+        },
+        "class_type": "EmptyLTXVLatentVideo",
+        "_meta": {
+          "title": "EmptyLTXVLatentVideo"
+        }
+      },
+      "2122": {
+        "inputs": {
+          "lora_name": "ltx-video-ICLoRA-detailer-13B-0.9.8",
+          "strength_model": 1,
+          "model": [
+            "1896",
+            0
+          ]
+        },
+        "class_type": "LoraLoaderModelOnly",
+        "_meta": {
+          "title": "LoraLoaderModelOnly"
+        }
+      },
+      "2124": {
+        "inputs": {
+          "guiding_strength": 1,
+          "temporal_tile_size": 80,
+          "temporal_overlap": 24,
+          "temporal_overlap_cond_strength": 0.5,
+          "horizontal_tiles": 1,
+          "vertical_tiles": 1,
+          "spatial_overlap": 1,
+          "adain_factor": 0,
+          "optional_negative_index": -1,
+          "optional_negative_index_strength": 1,
+          "per_tile_seed_offsets": "0",
+          "per_tile_use_negative_latents": "1",
+          "model": [
+            "2122",
+            0
+          ],
+          "vae": [
+            "1896",
+            2
+          ],
+          "noise": [
+            "1598",
+            0
+          ],
+          "sampler": [
+            "1926",
+            0
+          ],
+          "sigmas": [
+            "2073",
+            0
+          ],
+          "guider": [
+            "1871",
+            0
+          ],
+          "latents": [
+            "1691",
+            0
+          ],
+          "optional_guiding_latents": [
+            "1691",
+            0
+          ]
+        },
+        "class_type": "LTXVLoopingSampler",
+        "_meta": {
+          "title": "🅛🅣🅧 LTXV Looping Sampler"
+        }
+      },
+      "2127": {
+        "inputs": {
+          "horizontal_tiles": 6,
+          "vertical_tiles": 6,
+          "overlap": 5,
+          "last_frame_fix": true,
+          "vae": [
+            "2117",
+            0
+          ],
+          "latents": [
+            "2124",
+            0
+          ]
+        },
+        "class_type": "LTXVTiledVAEDecode",
+        "_meta": {
+          "title": "🅛🅣🅧 LTXV Tiled VAE Decode"
+        }
+      },
+      "2136": {
+        "inputs": {
+          "prompts": "a chimpanzee walks in the jungle |\na chimpanzee stops and eats a snack |\na chimpanzee lays on the ground",
+          "clip": [
+            "38",
+            0
+          ]
+        },
+        "class_type": "MultiPromptProvider",
+        "_meta": {
+          "title": "🅛🅣🅧 Multi Prompt Provider"
+        }
+      },
+      "2137": {
+        "inputs": {
+          "text": "",
+          "clip": [
+            "38",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Prompt)"
+        }
+      },
+      "2140": {
+        "inputs": {
+          "value": 768
+        },
+        "class_type": "PrimitiveInt",
+        "_meta": {
+          "title": "Width"
+        }
+      },
+      "2141": {
+        "inputs": {
+          "value": 512
+        },
+        "class_type": "PrimitiveInt",
+        "_meta": {
+          "title": "Height"
+        }
+      },
+      "2142": {
+        "inputs": {
+          "width": 512,
+          "height": 512,
+          "upscale_method": "bilinear",
+          "keep_proportion": false,
+          "divisible_by": 32,
+          "crop": "center",
+          "image": [
+            "1960",
+            0
+          ],
+          "width_input": [
+            "2140",
+            0
+          ],
+          "height_input": [
+            "2141",
+            0
+          ]
+        },
+        "class_type": "ImageResizeKJ",
+        "_meta": {
+          "title": "Resize Image"
+        }
+      },
+      "2143": {
+        "inputs": {
+          "pixels": [
+            "2142",
+            0
+          ],
+          "vae": [
+            "1896",
+            2
+          ]
+        },
+        "class_type": "VAEEncode",
+        "_meta": {
+          "title": "VAE Encode"
+        }
+      },
+      "2146": {
+        "inputs": {
+          "horizontal_tiles": 4,
+          "vertical_tiles": 4,
+          "overlap": 3,
+          "last_frame_fix": true,
+          "vae": [
+            "1870",
+            0
+          ],
+          "latents": [
+            "2118",
+            0
+          ]
+        },
+        "class_type": "LTXVTiledVAEDecode",
+        "_meta": {
+          "title": "🅛🅣🅧 LTXV Tiled VAE Decode"
+        }
+      }
+    },
+    "comfy_fork_version": "develop@ba9dad4",
+    "workspace_info": {
+      "id": "elBQFQknIoLYTEwIloQuw"
+    },
+    "node_versions": {
+      "comfy-core": "0.3.20"
+    }
+  },
+  "version": 0.4
+}
