@@ -5,16 +5,16 @@ import random
 class PIP_PolyGenderJudgment:
     """
     POLY-性别判断节点
-    根据输入内容判断性别并输出对应的lora名字和动态prompt
+    根据输入内容判断性别并输出对应的lora名字和动态提示词
     
     性别判断规则:
-    - 包含完整单词"male"（不区分大小写）→ male
-    - 包含完整单词"female"（不区分大小写）→ female  
+    - 包含完整单词"male"（不区分大小写）→ 男的
+    - 包含完整单词"female"（不区分大小写）→ 女的
     - 都不包含或都包含 → 其他
     
     输出:
-    - lora: male/female对应的lora名字，其他情况随机选择一个
-    - dynamic_prompt: male/female对应的prompt，其他情况输出空字符串
+    - lora: 对应性别的lora名字
+    - dynamic_prompt: 起手式 + 动态提示词的组合
     """
     
     @classmethod
@@ -31,25 +31,46 @@ class PIP_PolyGenderJudgment:
                 "female_lora": ("STRING", {
                     "default": "female_lora_v1"
                 }),
-                "male_prompt": ("STRING", {
+                "other_lora": ("STRING", {
+                    "default": "other_lora_v1"
+                }),
+                "dynamic_prompt_male": ("STRING", {
                     "multiline": True,
                     "default": "handsome man, masculine features"
                 }),
-                "female_prompt": ("STRING", {
+                "dynamic_prompt_female": ("STRING", {
                     "multiline": True,
                     "default": "beautiful woman, elegant features"
+                }),
+                "dynamic_prompt_other": ("STRING", {
+                    "multiline": True,
+                    "default": "person, neutral features"
+                }),
+                "prefix_prompt_male": ("STRING", {
+                    "multiline": True,
+                    "default": "strong and confident"
+                }),
+                "prefix_prompt_female": ("STRING", {
+                    "multiline": True,
+                    "default": "elegant and graceful"
+                }),
+                "prefix_prompt_other": ("STRING", {
+                    "multiline": True,
+                    "default": "unique and artistic"
                 })
             }
         }
     
-    RETURN_TYPES = ("STRING", "STRING")
-    RETURN_NAMES = ("lora", "dynamic_prompt")
+    RETURN_TYPES = ("STRING", "STRING", "STRING")
+    RETURN_NAMES = ("lora", "prefix_prompt", "dynamic_prompt")
     FUNCTION = "judge_gender"
     CATEGORY = "PIP_Tool"
     
-    def judge_gender(self, input_content, male_lora, female_lora, male_prompt, female_prompt):
+    def judge_gender(self, input_content, male_lora, female_lora, other_lora, 
+                    dynamic_prompt_male, dynamic_prompt_female, dynamic_prompt_other,
+                    prefix_prompt_male, prefix_prompt_female, prefix_prompt_other):
         """
-        判断性别并返回对应的lora和prompt
+        判断性别并返回对应的lora、起手式和动态提示词
         """
         # 判断性别
         gender = self._detect_gender(input_content)
@@ -57,21 +78,24 @@ class PIP_PolyGenderJudgment:
         # 根据性别返回对应的输出
         if gender == "male":
             lora_output = male_lora
-            prompt_output = male_prompt
+            prefix_output = prefix_prompt_male
+            dynamic_output = dynamic_prompt_male
         elif gender == "female":
             lora_output = female_lora
-            prompt_output = female_prompt
+            prefix_output = prefix_prompt_female
+            dynamic_output = dynamic_prompt_female
         else:  # 其他情况
-            # 随机选择一个lora
-            lora_output = random.choice([male_lora, female_lora])
-            prompt_output = ""  # 其他情况输出空字符串
+            lora_output = other_lora
+            prefix_output = prefix_prompt_other
+            dynamic_output = dynamic_prompt_other
         
         print(f"[PIP_PolyGenderJudgment] 输入内容: {input_content}")
         print(f"[PIP_PolyGenderJudgment] 检测到性别: {gender}")
         print(f"[PIP_PolyGenderJudgment] 输出lora: {lora_output}")
-        print(f"[PIP_PolyGenderJudgment] 输出prompt: {prompt_output}")
+        print(f"[PIP_PolyGenderJudgment] 输出起手式: {prefix_output}")
+        print(f"[PIP_PolyGenderJudgment] 输出动态提示词: {dynamic_output}")
         
-        return (lora_output, prompt_output)
+        return (lora_output, prefix_output, dynamic_output)
     
     def _detect_gender(self, text):
         """
@@ -111,3 +135,5 @@ class PIP_PolyGenderJudgment:
         else:
             # 都不包含 → 其他
             return "其他"
+    
+
