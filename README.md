@@ -1,4 +1,4 @@
-## 自用的comfyui节点汇总，有BUG但可以不改嘿嘿
+## 自用的comfyui节点汇总
 ![image](https://github.com/user-attachments/assets/276c33dd-5fda-4d75-bbf4-9cbc312c6068)
 <img width="3361" height="1470" alt="image" src="https://github.com/user-attachments/assets/1d310277-74d3-482e-9424-dfb2d22af989" />
 
@@ -39,14 +39,14 @@
 - RGBA转RGB
 - 保存txt到output（/\都支持但是必须输出路径展示为文本才可以执行到这个环节）
 - 图像转像素化的无聊功能
-- 动态提示词支持多级嵌套（备注下用法{|/\},嗯我必能想起来咋用）
+- 动态提示词支持多级嵌套（备注下用法{|/\},嗯我必能想起来咋用）--迭代了优先级判断（优先级两个及以上单词优先级至上）
 - 边缘纯色扩充（单方向扩充H,双方向从中心扩充H/2）
 - 亮度检测
 - 亮度补偿
 - PIP 自定义扩图（mask）
 - 新增了字节的Seed-X-Instruct-7B，模型去huggingface下，部分配置文件有调整，速度挺快的，支持多语言
 - PIP 性别判断动态起手式（男/女）
-
+- POLY 性别判断（动态决定起手式和lora名字）
 
 
 ## 记一些蛇皮问题
