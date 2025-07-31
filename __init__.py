@@ -25,6 +25,7 @@ from .PIP_CustomExpand import PIP_CustomExpand
 from .PIP_BrightnessAnalysis import PIP_BrightnessAnalysis
 from .PIP_BrightnessCorrection import PIP_BrightnessCorrection
 from .PIP_GenderDynamicPrompt import PIP_GenderDynamicPrompt
+from .PIP_PolyGenderJudgment import PIP_PolyGenderJudgment
 # Simple node removed - vLLM node provides better performance
 
 # 尝试导入vLLM版本（可选）
@@ -68,7 +69,8 @@ NODE_CLASS_MAPPINGS = {
     "PIP_CustomExpand": PIP_CustomExpand,
     "PIP_BrightnessAnalysis": PIP_BrightnessAnalysis,
     "PIP_BrightnessCorrection": PIP_BrightnessCorrection,
-    "PIP_GenderDynamicPrompt": PIP_GenderDynamicPrompt
+    "PIP_GenderDynamicPrompt": PIP_GenderDynamicPrompt,
+    "PIP_PolyGenderJudgment": PIP_PolyGenderJudgment
 }
 
 # 有条件地添加vLLM节点
@@ -107,7 +109,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PIP_CustomExpand": "PIP 自定义扩图（mask）",
     "PIP_BrightnessAnalysis": "PIP 亮度检测",
     "PIP_BrightnessCorrection": "PIP 亮度补偿",
-    "PIP_GenderDynamicPrompt": "PIP 性别判断动态起手式"
+    "PIP_GenderDynamicPrompt": "PIP 性别判断动态起手式",
+    "PIP_PolyGenderJudgment": "POLY-性别判断"
 }
 
 # 有条件地添加vLLM节点显示名称
